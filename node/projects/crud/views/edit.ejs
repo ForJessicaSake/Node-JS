@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title:'Edit'})%>
+  <body>
+    <main class="todo-form-container">
+      <h1>Edit Todo</h1>
+      <form
+        method="post"
+        action="/todos/<%=todo.id%>?_method=PATCH"
+        class="todo-form"
+      >
+        <label>
+          Todo description
+          <textarea
+            rows="10"
+            name="description"
+            placeholder="Enter task description"
+          >
+<%= todo.description %></textarea
+          >
+        </label>
+        <button>Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title:'New Todo'})%>
+  <body>
+    <main class="todo-form-container">
+      <h1>Hello, what are we doing today?</h1>
+      <form method="post" action="/todos" class="todo-form">
+        <label>
+          Todo title
+          <input name="title" placeholder="Enter task title" />
+        </label>
+        <label>
+          Todo description
+          <textarea
+            rows="10"
+            name="description"
+            placeholder="Enter task description"
+          ></textarea>
+        </label>
+        <button>Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

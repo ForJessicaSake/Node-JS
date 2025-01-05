@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title:'Details'})%>
+  <body>
+    <h1>Todo Details</h1>
+    <div class="todo-card">
+      <p class="todo-title"><%=todo.title.toUpperCase()%></p>
+      <p><%=todo.description%>.</p>
+      <div class="todo-actions">
+        <a href="http://localhost:3000/todos/<%=todo.id%>/edit"> Edit Todo </a>
+        <form method="post" action="/todos/<%=todo.id%>?_method=DELETE">
+          <button type="submit">Delete Todo</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

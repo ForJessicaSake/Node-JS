@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title: 'Todos'})%>
+  <body>
+    <main>
+      <div class="todos-header">
+        <h1>Todos</h1>
+        <a href="http://localhost:3000/todos/new">Create Todo</a>
+      </div>
+      <div class="todos">
+        <% for(let todo of todos){%>
+        <div class="todo-card">
+          <p class="todo-title"><%=todo.title.toUpperCase()%></p>
+          <p><%=todo.description.slice(0, 50)%>...</p>
+          <a href="http://localhost:3000/todos/<%=todo.id%>">Read more</a>
+        </div>
+        <%}%>
+      </div>
+    </main>
+  </body>
+</html>
