@@ -2,7 +2,10 @@
 <html lang="en">
   <%-include('partials/head', {title:'Details'})%>
   <body>
-    <h1>Todo Details</h1>
+    <div class="flex">
+      <a href="http://localhost:3000/todos">Back</a>
+      <h1>Todo Details</h1>
+    </div>
     <div class="todo-card">
       <p class="todo-title"><%=todo.title.toUpperCase()%></p>
       <p><%=todo.description%>.</p>

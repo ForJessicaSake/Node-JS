@@ -6,6 +6,12 @@ body {
   max-width: 1700px;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 button,
 a {
   padding: 10px;

@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+const generateRandomId = Math.floor(Math.random() * 10) + 1;
 
 app.get("/todos", (req, res) => {
   res.render("index", { todos });
@@ -47,7 +48,6 @@ app.patch("/todos/:id", (req, res) => {
 
 app.post("/todos", (req, res) => {
   const { title, description } = req.body;
-  const generateRandomId = Math.floor(Math.random() * 10) + 1;
   const todo = {
     title,
     description,
