@@ -3,6 +3,7 @@
     "@types/node": "^22.10.2"
   },
   "dependencies": {
+    "express": "^4.21.2",
     "give-me-a-joke": "^0.5.1"
   }
 }
