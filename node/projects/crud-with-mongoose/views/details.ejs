@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head', {title:product.name}) %>
+  <body>
+    <h1>Product Details</h1>
+    <div class="product-item">
+      <div class="product-image-container">
+        <% if (product.image) { %>
+        <img src="<%= product.image %>.jpg" alt="<%= product.name %>" />
+        <% } else { %>
+        <img src="/images/<%= product.name %>.jpg" alt="<%= product.name %>" />
+        <% } %>
+      </div>
+      <p>Product: <span><%=product.name%></span></p>
+      <p>Price: <span>$<%=product.price%></span></p>
+      <p>Category: <span><%=product.category%></span></p>
+      <div class="product-actions">
+        <a href="http://localhost:3000/products/<%=product.id%>/edit">Edit</a>
+        <form
+          method="post"
+          action="http://localhost:3000/products/<%=product.id%>?_method=DELETE"
+        >
+          <button class="button">Delete</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

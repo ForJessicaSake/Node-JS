@@ -2,9 +2,12 @@ body {
   margin: auto 20px;
   padding: 15px;
   box-sizing: border-box;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   max-width: 1700px;
+  font-family: "Quicksand", serif;
+}
+
+table {
+  width: 100%;
 }
 
 .flex {
@@ -15,6 +18,14 @@ body {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .font-bold {
@@ -54,12 +65,17 @@ button:hover {
   gap: 30px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
+  .product-details {
+    display: flex;
+    flex-direction: column;
+  }
   .products {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 @media screen and (max-width: 500px) {
   .products {
     display: grid;
@@ -81,8 +97,82 @@ button:hover {
   font-size: 25px;
 }
 
+.product-item {
+  width: 300px;
+  border: 1px solid #e9ebed;
+  padding: 10px;
+}
+.product-item p {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.product-item span {
+  font-weight: normal;
+}
+.product-item img {
+  height: 180px;
+  width: 180px;
+}
+
+.product-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .product-card img {
   height: 400px;
   width: 100%;
   border-radius: 20px;
+}
+
+.product-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-form label {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 400px;
+  padding: 10px;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+}
+
+.product-form select,
+button {
+  width: 420px;
+  padding: 10px;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-actions button,
+a {
+  text-align: center;
+  width: 100px;
 }

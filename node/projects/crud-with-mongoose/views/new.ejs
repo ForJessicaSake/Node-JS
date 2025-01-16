@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title:'New product'})%>
+  <body>
+    <main class="product-form-container">
+      <h1>Add product</h1>
+      <form method="post" action="/products" class="product-form">
+        <label>
+          Product name
+          <input name="name" placeholder="Enter product name" />
+        </label>
+        <label>
+          Product image
+          <input name="image" placeholder="Enter product image" />
+        </label>
+        <label>
+          Product price
+          <input name="price" type="number" placeholder="Enter product price" />
+        </label>
+        <label>
+          Product category
+          <select name="category" placeholder="Enter product category">
+            <% for(let category of Categories){ %>
+            <option value="<%=category%>"><%=category%></option>
+            <%}%>
+          </select>
+        </label>
+        <button>Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

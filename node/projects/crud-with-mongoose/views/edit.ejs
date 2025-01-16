@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('partials/head', {title:product.name})%>
+  <body>
+    <main class="product-form-container">
+      <h1>Edit product</h1>
+      <form method="post" action="/products/<%=product.id%>?_method=PATCH" class="product-form">
+        <label>
+          Product name
+          <input
+            name="name"
+            placeholder="Enter product name"
+            value="<%=product.name %>"
+          />
+        </label>
+        <label>
+          Product image
+          <input
+            name="image"
+            placeholder="Enter product image"
+            value="<%=product?.image %>"
+          />
+        </label>
+        <label>
+          Product price
+          <input
+            name="price"
+            type="number"
+            placeholder="Enter product price"
+            value="<%=product.price %>"
+          />
+        </label>
+        <label>
+          Product category
+          <select
+            name="category"
+            placeholder="Enter product category"
+          >
+          <% for(let category of Categories){ %>
+            <option value="<%=category%>" <%=product.category === category ? 'selected' : ""%> ><%=category%></option>
+            <%}%>
+          </select>
+        </label>
+        <button>Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -4,19 +4,24 @@
   <body>
     <main>
       <div class="product-header">
-        <h1>Products</h1>
-        <a href="/product/new">New Product</a>
+        <h1>All Products</h1>
+        <input type="text" placeholder="Search products" />
+        <a href="/products/new">New Product</a>
       </div>
       <div class="products">
         <%for(let product of products){%>
         <div class="product-card">
-          <img src="/images/<%=product.name%>.jpg" alt="<%=product.name%>" />
-          <p class="product-name"><%=product.name%></p>
-          <p>Category: <%=product.category%></p>
-          <p>Price per kg</p>
-          <div class="flex justify-between">
-            <p class="font-bold">$<%=product.price%></p>
-            <a href="http://localhost:3000/product/<%=product.id%>"
+          <% if (product.image) { %>
+          <img src="<%= product.image %>.jpg" alt="<%= product.name %>" />
+          <% } else { %>
+          <img
+            src="/images/<%= product.name %>.jpg"
+            alt="<%= product.name %>"
+          />
+          <% } %>
+          <div class="flex justify-between product-details">
+            <p class="product-name"><%=product.name%></p>
+            <a href="http://localhost:3000/products/<%=product.id%>"
               >View details</a
             >
           </div>
