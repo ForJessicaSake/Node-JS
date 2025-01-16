@@ -5,7 +5,7 @@ const methodOverride = require("method-override");
 const Products = require("./models/product");
 
 const Product = Products.Product;
-const Categories = Products.Categories;
+const categories = Products.Categories;
 
 const app = express();
 app.set("view engine", "ejs");
@@ -34,7 +34,7 @@ app.get("/products", async (req, res) => {
 
 app.get("/products/new", async (req, res) => {
   res.render("new", {
-    Categories,
+    categories,
   });
 });
 
@@ -48,7 +48,7 @@ app.get("/products/:id", async (req, res) => {
 app.get("/products/:id/edit", async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);
-  res.render("edit", { product, Categories });
+  res.render("edit", { product, categories });
 });
 
 app.post("/products", async (req, res) => {
