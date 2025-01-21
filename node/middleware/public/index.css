@@ -1,0 +1,7 @@
+body {
+  margin: auto 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  max-width: 1700px;
+  font-family: "Quicksand", serif;
+}
