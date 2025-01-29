@@ -1,11 +1,14 @@
 const path = require("path");
+const YAML = require("yamljs");
 const express = require("express");
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
 const methodOverride = require("method-override");
 const Products = require("./models/product");
 
 const Product = Products.Product;
 const categories = Products.Categories;
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -14,8 +17,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const mongoDb = "mongodb://127.0.0.1:27017/farmstand";
+
 mongoose
   .connect(mongoDb)
   .then(() => console.log("connect express app to mongoose"))
