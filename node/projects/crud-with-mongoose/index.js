@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const swaggerUi = require("swagger-ui-express");
 const methodOverride = require("method-override");
 const Products = require("./models/product");
+const AppError = require("./error");
 
 const Product = Products.Product;
 const categories = Products.Categories;
@@ -26,14 +27,14 @@ mongoose
   .then(() => console.log("connect express app to mongoose"))
   .catch((error) => console.log(`An error occurred ${error}`));
 
-app.get("/products", async (req, res) => {
+app.get("/products", async (req, res, next) => {
   try {
     const products = await Product.find({});
     res.render("index", {
       products,
     });
   } catch (error) {
-    console.log(error);
+    next(new AppError(error, 500));
   }
 });
 
@@ -43,36 +44,69 @@ app.get("/products/new", async (req, res) => {
   });
 });
 
-app.get("/products/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-
-  res.render("details", { product });
+app.get("/products/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      next(new AppError("product could not be found", 400));
+    } else {
+      res.render("details", { product });
+    }
+  } catch (error) {
+    next(new AppError("product not found", 400));
+  }
 });
 
-app.get("/products/:id/edit", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.render("edit", { product, categories });
+app.get("/products/:id/edit", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      next(new AppError("product could not be found", 400));
+    } else {
+      res.render("edit", { product, categories });
+    }
+  } catch (error) {
+    next(new AppError("product could not be updated", 500));
+  }
 });
 
-app.post("/products", async (req, res) => {
-  const payload = req.body;
-  await Product.insertMany(payload);
-  res.redirect("/products");
+app.post("/products", async (req, res, next) => {
+  try {
+    const payload = req.body;
+    await Product.insertMany(payload);
+    res.redirect("/products");
+  } catch (error) {
+    next(new AppError("product could not be created", 500));
+  }
 });
 
-app.patch("/products/:id", async (req, res) => {
-  const { id } = req.params;
-  const payload = req.body;
-  await Product.findByIdAndUpdate(id, payload);
-  res.redirect("/products");
+app.patch("/products/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const payload = req.body;
+    await Product.findByIdAndUpdate(id, payload);
+    res.redirect("/products");
+  } catch (error) {
+    next(new AppError("product could not be updated", 500));
+  }
 });
 
-app.delete("/products/:id", async (req, res) => {
-  const { id } = req.params;
-  await Product.findByIdAndDelete(id);
-  res.redirect("/products");
+app.delete("/products/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
+    res.redirect("/products");
+  } catch (error) {
+    next(new AppError("product could not be deleted", 500));
+  }
+});
+
+//error handling middleware
+app.use((err, req, res, next) => {
+  const { statusCode, message } = err;
+  res.status(statusCode).send(message);
 });
 
 // listening on port 3000
