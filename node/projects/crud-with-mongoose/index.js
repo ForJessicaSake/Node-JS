@@ -63,7 +63,7 @@ app.get("/products/:id/edit", async (req, res, next) => {
     const { id } = req.params;
     const product = await Product.findById(id);
     if (!product) {
-      next(new AppError("product could not be found", 404));
+      throw new AppError("product could not be found", 404);
     } else {
       res.render("edit", { product, categories });
     }
